@@ -1,3 +1,17 @@
+class console_colors:  # for printing color texts to console
+    HIGHLIGHT = "\x1b[6;30;42m"
+    HIGHLIGHT_END = "\x1b[0m"
+    HEADER = "\033[95m"
+    OKBLUE = "\033[94m"
+    OKCYAN = "\033[96m"
+    OKGREEN = "\033[92m"
+    WARNING = "\033[93m"
+    FAIL = "\033[91m"
+    ENDC = "\033[0m"
+    BOLD = "\033[1m"
+    UNDERLINE = "\033[4m"
+
+
 import sys
 import json
 import signal
@@ -6,12 +20,11 @@ from bs4 import BeautifulSoup
 from urllib.parse import quote_plus as url_encode
 from datetime import datetime, timedelta
 
-
 # * Inputs
 # ----------------------------
 query = "Tata Motors"
-starting_date = "8/2/2018"  # ? MM/DD/YYYY without leading zero
-ending_date = "8/3/2018"  # ? MM/DD/YYYY without leading zero
+starting_date = "9/25/2018"  # ? MM/DD/YYYY without leading zero
+ending_date = "6/28/2023"  # ? MM/DD/YYYY without leading zero
 max_req_limit = (
     50  #! your IP can get banned if you give to much requests (maybe 2500 req/ day)
 )
@@ -47,14 +60,16 @@ error_message = "did not match any news results."
 
 
 def save_news_JSON(file_name):
-    print(f"Saving Data in /news_data/{file_name}.")
+    print(
+        f"{console_colors.OKCYAN}Saving Data in /news_data/{file_name}.{console_colors.ENDC}"
+    )
     with open("news_data/" + file_name, "w", encoding="utf-8") as f:
         json.dump(news, f, ensure_ascii=False, indent=4)
 
 
 def signal_handler(sig, frame):
     save_news_JSON("fallback.json")
-    print("You pressed Ctrl+C!")
+    print(f"{console_colors.FAIL}You pressed Ctrl+C!{console_colors.ENDC}")
     print("Data until now is saved as fallback.json")
     sys.exit(0)
 
@@ -70,7 +85,10 @@ def get_news():
 
     while True:
         if num_req >= max_req_limit:
-            print("Reached Max Request Limit: ", max_req_limit)
+            print(
+                f"{console_colors.FAIL}Reached Max Request Limit: {console_colors.ENDC}",
+                max_req_limit,
+            )
             sys.exit()
             break
 
@@ -81,7 +99,7 @@ def get_news():
 
         soup = BeautifulSoup(page.content, "html.parser")
         if error_message in soup.body.text:
-            print("All News Scraped.")
+            print(f"{console_colors.OKGREEN}All News Scraped.{console_colors.ENDC}")
             break
 
         print(f"  - getting page number {num_page} of google search:")
@@ -115,9 +133,12 @@ def get_news():
 
 while True:
     if current_datetime > ending_datetime:
-        print("All Data Scraped.")
+        print(f"{console_colors.OKGREEN}All Data Scraped.{console_colors.ENDC}")
         break
-    print("getting news on given query on date :", current_datetime)
+    print(
+        f"{console_colors.HIGHLIGHT}getting news on given query on date : {console_colors.HIGHLIGHT_END}",
+        current_datetime,
+    )
     get_news()
     print("--------------------------------------------------------------")
     current_datetime = current_datetime + one_day
