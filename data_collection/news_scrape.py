@@ -23,7 +23,7 @@ from datetime import datetime, timedelta
 # * Inputs
 # ----------------------------
 query = "Tata Motors"
-starting_date = "9/25/2018"  # ? MM/DD/YYYY without leading zero
+starting_date = "11/29/2018"  # ? MM/DD/YYYY without leading zero
 ending_date = "6/28/2023"  # ? MM/DD/YYYY without leading zero
 max_req_limit = (
     50  #! your IP can get banned if you give to much requests (maybe 2500 req/ day)
