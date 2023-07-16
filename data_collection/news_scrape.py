@@ -23,11 +23,9 @@ from datetime import datetime, timedelta
 # * Inputs
 # ----------------------------
 query = "Tata Motors"
-starting_date = "11/29/2018"  # ? MM/DD/YYYY without leading zero
-ending_date = "6/28/2023"  # ? MM/DD/YYYY without leading zero
-max_req_limit = (
-    50  #! your IP can get banned if you give to much requests (maybe 2500 req/ day)
-)
+starting_date = "5/8/2019"  # ? MM/DD/YYYY without leading zero
+ending_date = "6/28/2023"  # ? MM/DD/YYYY without leadPing zero
+max_req_limit = 50  #! your IP can get banned if you give to much requests (maybe 2500 req/ day, but being on the safe side by setting it to 50)
 headers = {
     "User-Agent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:77.0) Gecko/20100101 Firefox/77.0"
 }
@@ -137,7 +135,7 @@ while True:
         break
     print(
         f"{console_colors.HIGHLIGHT}getting news on given query on date : {console_colors.HIGHLIGHT_END}",
-        current_datetime,
+        current_datetime.strftime("%d-%m-%Y"),
     )
     get_news()
     print("--------------------------------------------------------------")
