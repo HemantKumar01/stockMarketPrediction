@@ -23,9 +23,9 @@ from datetime import datetime, timedelta
 # * Inputs
 # ----------------------------
 query = "Tata Motors"
-starting_date = "7/25/2019"  # ? MM/DD/YYYY without leading zeroes
+starting_date = "8/28/2019"  # ? MM/DD/YYYY without leading zeroes
 ending_date = "6/28/2023"  # ? MM/DD/YYYY without leadPing zeroes
-max_req_limit = 50  #! your IP can get banned if you give to much requests (maybe 2500 req/ day, but being on the safe side by setting it to 50)
+max_req_limit = 100  #! your IP can get banned if you give to much requests (maybe 2500 req/ day, but being on the safe side by setting it to 50)
 headers = {
     "User-Agent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:77.0) Gecko/20100101 Firefox/77.0"
 }
